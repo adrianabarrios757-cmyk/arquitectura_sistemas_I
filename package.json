@@ -1,0 +1,22 @@
+{
+  "name": "api-typescript-hw-01",
+  "version": "1.0.0",
+  "description": "API sencilla en TypeScript con métodos GET, POST, PUT, PATCH y DELETE",
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch src/index.ts",
+    "start": "node src/index.ts",
+    "check": "tsc"
+  },
+  "engines": {
+    "node": ">=22.18.0"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^24.0.0",
+    "typescript": "^6.0.0"
+  }
+}
