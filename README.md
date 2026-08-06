@@ -1,49 +1,38 @@
-# API sencilla en TypeScript
+# API de productos con documentación Swagger
 
-API REST creada con TypeScript, Node.js y Express. Permite utilizar los métodos HTTP GET, POST, PUT, PATCH y DELETE. La información se guarda temporalmente en memoria, por lo que se reinicia cuando el servidor se detiene.
+API sencilla desarrollada en TypeScript y Express. Permite utilizar los métodos HTTP GET, POST, PUT, PATCH y DELETE. La información se guarda temporalmente en memoria, por lo que no utiliza una base de datos.
 
 ## Requisitos
 
-- Node.js 22.18.0 o superior
-- npm
-- Git
+- Node.js 22.18.0 o una versión superior.
+- npm.
 
-## Instalación y ejecución
+## Instalación
 
-1. Clonar el repositorio:
-
-```bash
-git clone URL_DEL_REPOSITORIO
-```
-
-2. Entrar a la carpeta:
-
-```bash
-cd NOMBRE_DEL_REPOSITORIO
-```
-
-3. Cambiar a la rama de la tarea:
-
-```bash
-git switch hw-01
-```
-
-4. Instalar las dependencias:
+Abrir una terminal dentro de la carpeta del proyecto y ejecutar:
 
 ```bash
 npm install
 ```
 
-5. Comprobar el código TypeScript:
+## Revisar el código TypeScript
 
 ```bash
 npm run check
 ```
 
-6. Ejecutar la API:
+## Ejecutar el proyecto
+
+Para ejecutar la API en modo desarrollo:
 
 ```bash
 npm run dev
+```
+
+También se puede ejecutar con:
+
+```bash
+npm start
 ```
 
 La API estará disponible en:
@@ -52,23 +41,37 @@ La API estará disponible en:
 http://localhost:3000
 ```
 
+## Documentación automática
+
+La documentación de Swagger estará disponible en:
+
+```text
+http://localhost:3000/docs
+```
+
+La especificación OpenAPI en formato JSON estará disponible en:
+
+```text
+http://localhost:3000/docs.json
+```
+
+Desde la página `/docs` se pueden visualizar y probar los métodos de la API.
+
 ## Endpoints
 
-| Método | Ruta | Descripción | Respuesta exitosa |
-|---|---|---|---|
-| GET | `/` | Comprueba que la API funciona | 200 |
-| GET | `/productos` | Obtiene todos los productos | 200 |
-| GET | `/productos/:id` | Obtiene un producto por ID | 200 |
-| POST | `/productos` | Crea un producto | 201 |
-| PUT | `/productos/:id` | Reemplaza completamente un producto | 200 |
-| PATCH | `/productos/:id` | Actualiza una parte del producto | 200 |
-| DELETE | `/productos/:id` | Elimina un producto | 204 |
+| Método | Ruta | Descripción |
+|---|---|---|
+| GET | `/` | Comprueba que la API funciona |
+| GET | `/productos` | Obtiene todos los productos |
+| GET | `/productos/:id` | Obtiene un producto por su identificador |
+| POST | `/productos` | Crea un producto |
+| PUT | `/productos/:id` | Reemplaza completamente un producto |
+| PATCH | `/productos/:id` | Actualiza parcialmente un producto |
+| DELETE | `/productos/:id` | Elimina un producto |
+| GET | `/docs` | Muestra la documentación automática |
+| GET | `/docs.json` | Muestra la especificación OpenAPI |
 
-La API también devuelve `400` cuando los datos son inválidos y `404` cuando el producto o la ruta no existen.
-
-## Ejemplos de datos JSON
-
-### POST /productos
+## Ejemplo para crear un producto
 
 ```json
 {
@@ -77,19 +80,16 @@ La API también devuelve `400` cuando los datos son inválidos y `404` cuando el
 }
 ```
 
-### PUT /productos/1
+## Códigos de respuesta
 
-```json
-{
-  "nombre": "Teclado mecánico",
-  "precio": 350
-}
-```
+| Código | Significado |
+|---|---|
+| 200 | Solicitud realizada correctamente |
+| 201 | Producto creado correctamente |
+| 204 | Producto eliminado correctamente |
+| 400 | Datos enviados incorrectamente |
+| 404 | Producto o ruta no encontrada |
 
-### PATCH /productos/1
+## Nota
 
-```json
-{
-  "precio": 400
-}
-```
+Los productos se guardan en un arreglo mientras el servidor está encendido. Al detener o reiniciar la API, la información vuelve a su estado inicial.

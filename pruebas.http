@@ -1,13 +1,19 @@
-### Verificar API
-GET http://localhost:3000/
+### Página principal
+GET http://localhost:3000
+
+### Documentación automática
+GET http://localhost:3000/docs/
+
+### Especificación OpenAPI en formato JSON
+GET http://localhost:3000/docs.json
 
 ### Obtener todos los productos
 GET http://localhost:3000/productos
 
-### Obtener producto por ID
+### Obtener un producto
 GET http://localhost:3000/productos/1
 
-### Crear producto
+### Crear un producto
 POST http://localhost:3000/productos
 Content-Type: application/json
 
@@ -16,7 +22,7 @@ Content-Type: application/json
   "precio": 1200
 }
 
-### Reemplazar producto completo
+### Reemplazar un producto
 PUT http://localhost:3000/productos/1
 Content-Type: application/json
 
@@ -25,7 +31,7 @@ Content-Type: application/json
   "precio": 350
 }
 
-### Actualizar solamente el precio
+### Actualizar parcialmente un producto
 PATCH http://localhost:3000/productos/1
 Content-Type: application/json
 
@@ -33,5 +39,5 @@ Content-Type: application/json
   "precio": 400
 }
 
-### Eliminar producto
+### Eliminar un producto
 DELETE http://localhost:3000/productos/2

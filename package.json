@@ -1,7 +1,7 @@
 {
-  "name": "api-typescript-hw-01",
+  "name": "api-typescript-hw-02",
   "version": "1.0.0",
-  "description": "API sencilla en TypeScript con métodos GET, POST, PUT, PATCH y DELETE",
+  "description": "API sencilla en TypeScript con documentación automática en Swagger",
   "type": "module",
   "scripts": {
     "dev": "node --watch src/index.ts",
@@ -12,11 +12,15 @@
     "node": ">=22.18.0"
   },
   "dependencies": {
-    "express": "^5.1.0"
+    "express": "^5.2.1",
+    "swagger-jsdoc": "^6.3.0",
+    "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
-    "@types/express": "^5.0.0",
+    "@types/express": "^5.0.6",
     "@types/node": "^24.0.0",
+    "@types/swagger-jsdoc": "^6.0.4",
+    "@types/swagger-ui-express": "^4.1.8",
     "typescript": "^6.0.0"
   }
 }
