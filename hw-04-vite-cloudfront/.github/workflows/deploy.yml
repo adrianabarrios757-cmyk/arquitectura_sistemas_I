@@ -1,0 +1,56 @@
+name: HW-04 - Deploy Vite to CloudFront
+
+on:
+  push:
+    branches:
+      - hw-04
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-hw04
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Build, Upload e Invalidate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Obtener código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          
+      - name: Instalar dependencias
+        run: npm install --no-audit --no-fund
+
+      - name: Build - Generar dist con Vite
+        run: npm run build
+
+      - name: Configurar credenciales AWS
+        uses: aws-actions/configure-aws-credentials@v6.3.0
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ vars.AWS_REGION }}
+
+      - name: Upload - Publicar dist en S3
+        env:
+          S3_BUCKET: ${{ vars.S3_BUCKET }}
+        run: |
+          test -n "$S3_BUCKET"
+          aws s3 sync dist/ "s3://$S3_BUCKET/" --delete
+
+      - name: Invalidate - Actualizar caché de CloudFront
+        env:
+          CLOUDFRONT_DISTRIBUTION_ID: ${{ vars.CLOUDFRONT_DISTRIBUTION_ID }}
+        run: |
+          test -n "$CLOUDFRONT_DISTRIBUTION_ID"
+          aws cloudfront create-invalidation \
+            --distribution-id "$CLOUDFRONT_DISTRIBUTION_ID" \
+            --paths '/*'
