@@ -1,0 +1,13 @@
+{
+  "name": "@barrios/shared",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "scripts": {
+    "build": "node ./scripts/build.mjs",
+    "test": "node --test test/*.test.js"
+  }
+}

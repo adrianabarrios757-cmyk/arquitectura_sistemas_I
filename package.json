@@ -1,22 +1,23 @@
 {
-  "name": "api-typescript-hw-01",
+  "name": "ferreteria-barrios-monorepo",
   "version": "1.0.0",
-  "description": "API sencilla en TypeScript con métodos GET, POST, PUT, PATCH y DELETE",
-  "type": "module",
+  "private": true,
+  "packageManager": "npm@10.9.2",
+  "workspaces": ["apps/*", "packages/*"],
   "scripts": {
-    "dev": "node --watch src/index.ts",
-    "start": "node src/index.ts",
-    "check": "tsc"
-  },
-  "engines": {
-    "node": ">=22.18.0"
-  },
-  "dependencies": {
-    "express": "^5.1.0"
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "test": "turbo run test",
+    "dev:web": "turbo run dev --filter=@barrios/web",
+    "dev:api": "turbo run dev --filter=@barrios/api",
+    "build:web": "turbo run build --filter=@barrios/web",
+    "build:api": "turbo run build --filter=@barrios/api",
+    "test:web": "turbo run test --filter=@barrios/web",
+    "test:api": "turbo run test --filter=@barrios/api",
+    "start:web": "npm run start --workspace=@barrios/web",
+    "start:api": "npm run start --workspace=@barrios/api"
   },
   "devDependencies": {
-    "@types/express": "^5.0.0",
-    "@types/node": "^24.0.0",
-    "typescript": "^6.0.0"
+    "turbo": "^2.8.19"
   }
 }

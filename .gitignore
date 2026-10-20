@@ -1,4 +1,9 @@
 node_modules/
+.turbo/
+dist/
 .env
+.env.*
+!.env.example
 .DS_Store
-npm-debug.log*
+*.log
+coverage/
